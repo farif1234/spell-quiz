@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaPlayCircle } from "react-icons/fa";
+import { ImVolumeDecrease, ImVolumeIncrease } from "react-icons/im";
 
 const CreateTest = ({ words, setWords }) => {
     const [test, setTest] = useState(false);
@@ -7,6 +8,7 @@ const CreateTest = ({ words, setWords }) => {
     const [text, setText] = useState("");
     const [status, setStatus] = useState("");
     const [number, setNumber] = useState(words.length);
+    const [volume, setVolume] = useState(0.3);
 
     const Url = "http://127.0.0.1:5000/audio/";
 
@@ -16,7 +18,7 @@ const CreateTest = ({ words, setWords }) => {
         console.log(data);
         // audio object with mp3 link
         const audio = new Audio(data);
-        audio.volume = 0.2;
+        audio.volume = (volume * 2) / 10;
         audio.play();
     }
 
@@ -39,6 +41,12 @@ const CreateTest = ({ words, setWords }) => {
             create your list.
         </h3>
     );
+
+    const changeVolume = (num) => {
+        if (volume + num < 0) setVolume(0);
+        else if (volume + num > 5) setVolume(5);
+        else setVolume(volume + num);
+    };
 
     const setupTest = (
         <div className=" flex flex-col mx-auto items-center w-1/2">
@@ -99,10 +107,21 @@ const CreateTest = ({ words, setWords }) => {
             </h1>
             <div className=" flex flex-row gap-4 items-center justify-center w-full mt-5">
                 <FaPlayCircle
-                    size={60}
-                    className="text-info cursor-pointer"
+                    size={90}
+                    className="text-info cursor-pointer h-fit"
                     onClick={() => playAudio(i)}
                 />
+                <div className=" flex flex-col items-center gap-4">
+                    <ImVolumeIncrease
+                        onClick={() => changeVolume(1)}
+                        className=" text-md cursor-pointer hover:scale-125"
+                    />
+                    <ImVolumeDecrease
+                        onClick={() => changeVolume(-1)}
+                        className=" text-md cursor-pointer hover:scale-125"
+                    />
+                </div>
+
                 <input
                     type="text"
                     placeholder="Type here"

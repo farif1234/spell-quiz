@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <div className=" mx-2 mt-2 items-center">
+        <div className=" mx-2 pt-2 items-center">
             <div className="navbar bg-primary text-primary-content rounded-3xl">
                 <div className="flex-1">
                     <Link
@@ -21,7 +21,7 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/test"} className=" text-lg">
+                            <Link to={"/test"} className=" text-lg mx-1">
                                 Create Test
                             </Link>
                         </li>

@@ -51,7 +51,15 @@ const CreateTest = ({ words, setWords }) => {
     const inTest = (
         <div className=" flex flex-col mx-auto items-center w-1/2">
             <hr class="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />
-            <h1 className=" text-3xl">In Test</h1>
+            <h1 className=" text-3xl">
+                <span className=" animate-pulse">Test in progress...</span>
+            </h1>
+            <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered input-primary w-full max-w-xs mt-4"
+            />
+
             <button
                 onClick={() => setTest(false)}
                 className="btn btn-error my-8 btn-wide"

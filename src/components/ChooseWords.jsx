@@ -31,7 +31,7 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                         Type in the words you want to learn in the textbox below
                     </h1>
                     <textarea
-                        className="textarea textarea-primary mt-10  w-1/2 text-sm h-40"
+                        className="textarea textarea-primary mt-1  w-1/2 text-sm h-40"
                         placeholder="Enter words separated by commas (e.g. cat, hat, bat...)"
                         onChange={(e) => {
                             setInp(e.target.value);

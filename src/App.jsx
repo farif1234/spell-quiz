@@ -11,7 +11,7 @@ function App() {
     const [inp, setInp] = useState("");
 
     return (
-        <div>
+        <div className=" h-screen">
             <Navbar />
             <div className="">
                 <Routes>

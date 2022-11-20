@@ -6,6 +6,7 @@ const CreateTest = ({ words, setWords }) => {
     const [i, setI] = useState(0);
     const [text, setText] = useState("");
     const [status, setStatus] = useState("");
+    const [number, setNumber] = useState(words.length);
 
     const Url = "http://127.0.0.1:5000/audio/";
 
@@ -15,6 +16,7 @@ const CreateTest = ({ words, setWords }) => {
         console.log(data);
         // audio object with mp3 link
         const audio = new Audio(data);
+        audio.volume = 0.2;
         audio.play();
     }
 
@@ -24,8 +26,10 @@ const CreateTest = ({ words, setWords }) => {
         } else {
             setI(i + 1);
             setText("");
-            setStatus("bg-green-300");
-            playAudio(i + 1);
+            setStatus(status == "bg-warning" ? "" : "bg-green-300");
+
+            if (i + 1 >= number - 1) setTest(false);
+            else playAudio(i + 1);
         }
     };
 
@@ -60,8 +64,12 @@ const CreateTest = ({ words, setWords }) => {
             <input
                 type="number"
                 placeholder=""
+                min="1"
+                max={words.length}
                 className="input input-bordered input-primary w-full max-w-xs"
                 disabled={test}
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
             />
             <button
                 onClick={() => {
@@ -86,11 +94,13 @@ const CreateTest = ({ words, setWords }) => {
                     Test in progress...
                 </span>
             </h1>
-            <h1 className=" mt-4 text-2xl">Progress: {i + 1}/25</h1>
-            <div className=" flex flex-row gap-4 items-center justify-center w-full">
+            <h1 className=" mt-4 text-2xl">
+                Progress: {i + 1}/{number}
+            </h1>
+            <div className=" flex flex-row gap-4 items-center justify-center w-full mt-5">
                 <FaPlayCircle
-                    size={50}
-                    className="my-5 text-info cursor-pointer rounded-full"
+                    size={55}
+                    className="text-info cursor-pointer rounded-full"
                     onClick={() => playAudio(i)}
                 />
                 <input
@@ -102,18 +112,35 @@ const CreateTest = ({ words, setWords }) => {
                         setText(e.target.value);
                         setStatus("");
                     }}
+                    onKeyDown={(e) => {
+                        if (e.key == "Enter") checkSpell();
+                        else if (e.key == "ArrowDown") playAudio(i);
+                    }}
                 />
                 <button
                     onClick={() => checkSpell()}
-                    className=" btn btn-lg btn-info my-8 btn-circle text-white text-sm"
+                    className=" btn btn-lg btn-info btn-circle text-white text-sm"
                 >
                     Check
                 </button>
+                <button
+                    onClick={() => {
+                        setStatus("bg-warning");
+                        setText(words[i]);
+                    }}
+                    className=" btn btn-lg btn-warning btn-circle text-white text-sm"
+                >
+                    Give Up
+                </button>
             </div>
+            <p className=" text-xs mr-28">
+                <kbd className="kbd kbd-xs">Enter</kbd> to check spelling.{" "}
+                <kbd className="kbd kbd-xs">▼</kbd> to repeat.
+            </p>
 
             <button
                 onClick={() => setTest(false)}
-                className="btn btn-error my-2 btn-wide"
+                className="btn btn-error my-12 btn-wide"
             >
                 Exit Test
             </button>

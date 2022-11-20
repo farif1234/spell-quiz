@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiFillWarning } from "react-icons/ai";
 
 const ChooseWords = ({ words, setWords, inp, setInp }) => {
     const sample1 =
@@ -69,16 +70,21 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                     >
                         Update Words
                     </button>
-                    <button
-                        onClick={() => {
-                            setWords([]);
-                            setInp("");
-                        }}
-                        className="btn btn-error w-1/2"
-                    >
-                        Clear Words
-                    </button>
-                    <p>Clearing words will erase current list!</p>
+                    <div className=" group w-full text-center">
+                        <button
+                            onClick={() => {
+                                setWords([]);
+                                setInp("");
+                            }}
+                            className="btn btn-error w-1/2"
+                        >
+                            Clear Words
+                        </button>
+                        <p className=" mt-2 underline underline-offset-2">
+                            <AiFillWarning className=" inline mb-1 mx-1 text-xl text-warning" />
+                            Clearing words will erase current list!
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

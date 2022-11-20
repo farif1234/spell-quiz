@@ -87,7 +87,7 @@ const CreateTest = ({ words, setWords }) => {
     );
 
     const inTest = (
-        <div className=" flex flex-col mx-auto items-center w-1/2">
+        <div className=" flex flex-col mx-auto items-center w-1/2 p-4 bg-yellow-100 drop-shadow-2xl rounded-2xl">
             <hr class="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />
             <h1 className=" text-xl">
                 <span className=" animate-pulse italic">
@@ -99,8 +99,8 @@ const CreateTest = ({ words, setWords }) => {
             </h1>
             <div className=" flex flex-row gap-4 items-center justify-center w-full mt-5">
                 <FaPlayCircle
-                    size={55}
-                    className="text-info cursor-pointer rounded-full"
+                    size={60}
+                    className="text-info cursor-pointer"
                     onClick={() => playAudio(i)}
                 />
                 <input

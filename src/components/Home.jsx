@@ -5,7 +5,7 @@ const Home = () => {
         <div className=" h-full w-full ">
             <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start  py-20">
                 <h1 className=" text-6xl font-bold p-4 rounded-3xl bg-base-200 hover:drop-shadow-2xl hover:scale-[1.03] duration-150 ">
-                    Welcome to SpellQuiz!
+                    Welcome to SpellQuiz! ✏️
                 </h1>
                 <h3 className=" mt-10 mb-8 text-3xl font-semibold underline">
                     About
@@ -22,9 +22,10 @@ const Home = () => {
                     >
                         Merriam-Webster
                     </a>
-                    , and a record to keep track of misspelled words. More
-                    features on the way!
+                    , and a record to keep track of misspelled words.{" "}
+                    <span className=" italic">More features on the way!</span>
                 </p>
+
                 <h3 className=" mt-20 mb-8 text-3xl font-semibold underline">
                     How To Use
                 </h3>

@@ -1,7 +1,32 @@
 import React, { useState } from "react";
+import { FaPlayCircle } from "react-icons/fa";
 
 const CreateTest = ({ words, setWords }) => {
     const [test, setTest] = useState(false);
+    const [i, setI] = useState(0);
+    const [text, setText] = useState("");
+    const [status, setStatus] = useState("typing");
+
+    const Url = "http://127.0.0.1:5000/audio/";
+
+    async function playAudio(idx) {
+        let response = await fetch(Url + words[idx]);
+        let data = await response.text();
+        console.log(data);
+        // audio object with mp3 link
+        const audio = new Audio(data);
+        audio.play();
+    }
+
+    const checkSpell = () => {
+        if (text != words[i]) {
+            setStatus("wrong");
+        } else {
+            setI(i + 1);
+            setText("");
+            setStatus("right");
+        }
+    };
 
     const noWords = (
         <h3 className=" text-xl px-3 py-1 rounded-full bg-red-300 animate-bounce">
@@ -54,15 +79,33 @@ const CreateTest = ({ words, setWords }) => {
             <h1 className=" text-3xl">
                 <span className=" animate-pulse">Test in progress...</span>
             </h1>
-            <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered input-primary w-full max-w-xs mt-4"
-            />
+            <div className=" flex flex-row gap-4 items-center justify-center mt-6 w-full">
+                <FaPlayCircle
+                    size={50}
+                    className="my-5 text-info cursor-pointer rounded-full"
+                    onClick={() => playAudio(i)}
+                />
+                <input
+                    type="text"
+                    placeholder="Type here"
+                    className="input input-bordered input-primary w-full max-w-xs "
+                    value={text}
+                    onChange={(e) => {
+                        setText(e.target.value);
+                        setStatus("typing");
+                    }}
+                />
+                <button
+                    onClick={() => checkSpell()}
+                    className=" btn btn-lg btn-info my-8 btn-circle text-white text-sm"
+                >
+                    Check
+                </button>
+            </div>
 
             <button
                 onClick={() => setTest(false)}
-                className="btn btn-error my-8 btn-wide"
+                className="btn btn-error my-2 btn-wide"
             >
                 Exit Test
             </button>

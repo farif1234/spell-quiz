@@ -4,7 +4,7 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
     const sample1 =
         "year, silver, toe, praise, acidic, vagabond, boats, identify, rings, wall, bear, triumph, innocent, innocent, rigid, conserve, resell, steal, steal, taboo, aquatic, wash, tangy, automatic, use, tent, surmise, view, overjoyed, nine, riddle, boy, welcome, operate, rings, swallow, boats";
     const sample2 =
-        "deer, apologise, suck, throat, table, direful, third, used, callous, swing, wealthy, rule, unnatural, act, maniacal, sound, scientific, fat, breezy, rate, equal, cap, fast, aback, ink, alike, adjustment, parsimonious, tested, colorful, legal, demonic, double, compare, boorish, certain, jog, veil, limit, beautiful, gray, appreciate, plane, peaceful, sulky, imperfect, able, comparison, explain, upbeat";
+        "deer, apologize, suck, throat, table, direful, third, used, callous, swing, wealthy, rule, unnatural, act, maniacal, sound, scientific, fat, breezy, rate, equal, cap, fast, aback, ink, alike, adjustment, parsimonious, tested, colorful, legal, demonic, double, compare, boorish, certain, jog, veil, limit, beautiful, gray, appreciate, plane, peaceful, sulky, imperfect, able, comparison, explain, upbeat";
     const handleChange = (s) => {
         if (s) {
             const wordArray = s.split(",");

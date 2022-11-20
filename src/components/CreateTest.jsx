@@ -5,7 +5,7 @@ const CreateTest = ({ words, setWords }) => {
     const [test, setTest] = useState(false);
     const [i, setI] = useState(0);
     const [text, setText] = useState("");
-    const [status, setStatus] = useState("typing");
+    const [status, setStatus] = useState("");
 
     const Url = "http://127.0.0.1:5000/audio/";
 
@@ -20,11 +20,12 @@ const CreateTest = ({ words, setWords }) => {
 
     const checkSpell = () => {
         if (text != words[i]) {
-            setStatus("wrong");
+            setStatus("bg-red-300");
         } else {
             setI(i + 1);
             setText("");
-            setStatus("right");
+            setStatus("bg-green-300");
+            playAudio(i + 1);
         }
     };
 
@@ -63,7 +64,11 @@ const CreateTest = ({ words, setWords }) => {
                 disabled={test}
             />
             <button
-                onClick={() => setTest(true)}
+                onClick={() => {
+                    setI(0);
+                    setStatus("");
+                    setTest(true);
+                }}
                 className={`btn btn-secondary my-8 btn-wide ${
                     test && "btn-disabled"
                 }`}
@@ -76,10 +81,13 @@ const CreateTest = ({ words, setWords }) => {
     const inTest = (
         <div className=" flex flex-col mx-auto items-center w-1/2">
             <hr class="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />
-            <h1 className=" text-3xl">
-                <span className=" animate-pulse">Test in progress...</span>
+            <h1 className=" text-xl">
+                <span className=" animate-pulse italic">
+                    Test in progress...
+                </span>
             </h1>
-            <div className=" flex flex-row gap-4 items-center justify-center mt-6 w-full">
+            <h1 className=" mt-4 text-2xl">Progress: {i + 1}/25</h1>
+            <div className=" flex flex-row gap-4 items-center justify-center w-full">
                 <FaPlayCircle
                     size={50}
                     className="my-5 text-info cursor-pointer rounded-full"
@@ -88,11 +96,11 @@ const CreateTest = ({ words, setWords }) => {
                 <input
                     type="text"
                     placeholder="Type here"
-                    className="input input-bordered input-primary w-full max-w-xs "
+                    className={`input input-bordered input-primary w-full max-w-xs ${status}`}
                     value={text}
                     onChange={(e) => {
                         setText(e.target.value);
-                        setStatus("typing");
+                        setStatus("");
                     }}
                 />
                 <button

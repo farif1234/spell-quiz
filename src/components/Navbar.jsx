@@ -10,7 +10,7 @@ const Navbar = () => {
                         to={"/"}
                         className="btn btn-ghost rounded-full normal-case text-3xl"
                     >
-                        SpellQuiz
+                        SpellWell
                     </Link>
                 </div>
                 <div className="flex-none">

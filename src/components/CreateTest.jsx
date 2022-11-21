@@ -1,17 +1,39 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FaPlayCircle } from "react-icons/fa";
 import { ImVolumeDecrease, ImVolumeIncrease } from "react-icons/im";
 
-const CreateTest = ({ words, setWords }) => {
-    const [test, setTest] = useState(false);
-    const [i, setI] = useState(0);
-    const [text, setText] = useState("");
-    const [status, setStatus] = useState("");
-    const [number, setNumber] = useState(words.length);
+function shuffle(array) {
+    let currentIndex = array.length,
+        randomIndex;
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+        ];
+    }
+    return array;
+}
+
+const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
+    // set variables
+    const [test, setTest] = useState(false); // is user taking test
+    const [i, setI] = useState(0); // index of word list
+    const [text, setText] = useState(""); // user input
+    const [status, setStatus] = useState(""); // whether input was right or wrong, used to color input background
+    const [numberOfQuestion, setnumberOfQuestion] = useState(words.length);
     const [volume, setVolume] = useState(0.3);
+    const [wordListInUse, setWordListInUse] = useState(words);
+
+    const isRandom = useRef(false);
 
     const Url = "http://127.0.0.1:5000/audio/";
 
+    // receive mp3 link and play audio
     async function playAudio(idx) {
         let response = await fetch(Url + words[idx]);
         let data = await response.text();
@@ -22,17 +44,25 @@ const CreateTest = ({ words, setWords }) => {
         audio.play();
     }
 
+    // check if user input is correct
     const checkSpell = () => {
+        // if wrong, color input box red and add word to missed word set
         if (text != words[i]) {
             setStatus("bg-red-300");
+            setMissedWords(missedWords.add(words[i]));
         } else {
             setI(i + 1);
             setText("");
             setStatus(status == "bg-warning" ? "" : "bg-green-300");
-
-            if (i + 1 >= number - 1) setTest(false);
+            if (i + 1 >= numberOfQuestion) setTest(false); // end test
             else playAudio(i + 1);
         }
+    };
+
+    const changeVolume = (num) => {
+        if (volume + num < 0) setVolume(0);
+        else if (volume + num > 5) setVolume(5);
+        else setVolume(volume + num);
     };
 
     const noWords = (
@@ -41,12 +71,6 @@ const CreateTest = ({ words, setWords }) => {
             create your list.
         </h3>
     );
-
-    const changeVolume = (num) => {
-        if (volume + num < 0) setVolume(0);
-        else if (volume + num > 5) setVolume(5);
-        else setVolume(volume + num);
-    };
 
     const setupTest = (
         <div className=" flex flex-col mx-auto items-center w-1/2">
@@ -76,14 +100,25 @@ const CreateTest = ({ words, setWords }) => {
                 max={words.length}
                 className="input input-bordered input-primary w-full max-w-xs"
                 disabled={test}
-                value={number}
-                onChange={(e) => setNumber(e.target.value)}
+                value={numberOfQuestion}
+                onChange={(e) => setnumberOfQuestion(e.target.value)}
             />
+            <div className=" flex flex-row gap-4 mt-4">
+                <p>Random Order</p>
+                <input
+                    type="checkbox"
+                    className="checkbox"
+                    onChange={(e) => {
+                        isRandom.current = e.target.checked;
+                    }}
+                />
+            </div>
             <button
                 onClick={() => {
                     setI(0);
                     setStatus("");
                     setTest(true);
+                    if (isRandom.current) setWords(shuffle(words));
                 }}
                 className={`btn btn-secondary my-8 btn-wide ${
                     test && "btn-disabled"
@@ -103,7 +138,7 @@ const CreateTest = ({ words, setWords }) => {
                 </span>
             </h1>
             <h1 className=" mt-4 text-2xl">
-                Progress: {i + 1}/{number}
+                Progress: {i + 1}/{numberOfQuestion}
             </h1>
             <div className=" flex flex-row gap-4 items-center justify-center w-full mt-5">
                 <FaPlayCircle
@@ -146,13 +181,14 @@ const CreateTest = ({ words, setWords }) => {
                     onClick={() => {
                         setStatus("bg-warning");
                         setText(words[i]);
+                        setMissedWords(missedWords.add(words[i]));
                     }}
                     className=" btn btn-lg btn-warning btn-circle text-white text-sm"
                 >
                     Give Up
                 </button>
             </div>
-            <p className=" text-xs mr-28">
+            <p className=" text-xs mr-16">
                 <kbd className="kbd kbd-xs">Enter</kbd> to check spelling.{" "}
                 <kbd className="kbd kbd-xs">▼</kbd> to repeat.
             </p>

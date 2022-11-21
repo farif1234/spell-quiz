@@ -27,7 +27,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
     const [status, setStatus] = useState(""); // whether input was right or wrong, used to color input background
     const [numberOfQuestion, setnumberOfQuestion] = useState(words.length);
     const [volume, setVolume] = useState(0.3);
-    const [wordListInUse, setWordListInUse] = useState(words);
+    const [wordListInUse, setWordListInUse] = useState([...words]);
 
     const isRandom = useRef(false);
 
@@ -35,7 +35,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
 
     // receive mp3 link and play audio
     async function playAudio(idx) {
-        let response = await fetch(Url + words[idx]);
+        let response = await fetch(Url + wordListInUse[idx]);
         let data = await response.text();
         console.log(data);
         // audio object with mp3 link
@@ -47,9 +47,9 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
     // check if user input is correct
     const checkSpell = () => {
         // if wrong, color input box red and add word to missed word set
-        if (text != words[i]) {
+        if (text != wordListInUse[i]) {
             setStatus("bg-red-300");
-            setMissedWords(missedWords.add(words[i]));
+            setMissedWords(missedWords.add(wordListInUse[i]));
         } else {
             setI(i + 1);
             setText("");
@@ -118,7 +118,9 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
                     setI(0);
                     setStatus("");
                     setTest(true);
-                    if (isRandom.current) setWords(shuffle(words));
+                    if (isRandom.current) {
+                        setWordListInUse(shuffle(wordListInUse));
+                    }
                 }}
                 className={`btn btn-secondary my-8 btn-wide ${
                     test && "btn-disabled"
@@ -180,8 +182,8 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
                 <button
                     onClick={() => {
                         setStatus("bg-warning");
-                        setText(words[i]);
-                        setMissedWords(missedWords.add(words[i]));
+                        setText(wordListInUse[i]);
+                        setMissedWords(missedWords.add(wordListInUse[i]));
                     }}
                     className=" btn btn-lg btn-warning btn-circle text-white text-sm"
                 >

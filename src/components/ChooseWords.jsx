@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiFillWarning } from "react-icons/ai";
+import { p1, p2, p3, p4, p5, p6, p7, p8, p9, p10 } from "../wordData";
 
 const ChooseWords = ({ words, setWords, inp, setInp }) => {
     const sample1 =
@@ -18,7 +19,7 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
 
     const setSample = (sample) => {
         setInp(sample);
-        handleChange(sample);
+        setWords(sample);
     };
 
     return (
@@ -61,6 +62,12 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                             className=" btn btn-secondary"
                         >
                             Sample 2
+                        </button>
+                        <button
+                            onClick={() => setSample(p1)}
+                            className=" btn btn-secondary"
+                        >
+                            Page 1
                         </button>
                     </div>
                     <hr class="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />

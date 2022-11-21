@@ -21,6 +21,11 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
+                            <Link to={"/dashboard"} className=" text-lg">
+                                Dashboard
+                            </Link>
+                        </li>
+                        <li>
                             <Link to={"/test"} className=" text-lg mx-1">
                                 Create Test
                             </Link>

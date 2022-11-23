@@ -62,7 +62,10 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                     </div>
                     <p className=" self-center text-2xl">
                         Use a page from the{" "}
-                        <a href="https://www.iasp.org/wp-content/uploads/2019/05/SpellSrWordList.pdf">
+                        <a
+                            className=" underline"
+                            href="https://www.iasp.org/wp-content/uploads/2019/05/SpellSrWordList.pdf"
+                        >
                             official IASP Word List
                         </a>
                         :

@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { FaPlayCircle } from "react-icons/fa";
 import { ImVolumeDecrease, ImVolumeIncrease } from "react-icons/im";
 
+// shuffle array function when random order is selected
 function shuffle(array) {
     let currentIndex = array.length,
         randomIndex;

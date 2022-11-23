@@ -3,6 +3,19 @@ import { AiFillWarning } from "react-icons/ai";
 import { p1, p2, p3, p4, p5, p6, p7, p8, p9, p10 } from "../wordData";
 
 const ChooseWords = ({ words, setWords, inp, setInp }) => {
+    const officalList = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10];
+    const pageList = {
+        p1: p1,
+        p2: p2,
+        p3: p3,
+        p4: p4,
+        p5: p5,
+        p6: p6,
+        p7: p7,
+        p8: p8,
+        p9: p9,
+        p10: p10,
+    };
     const sample1 =
         "year, silver, toe, praise, acidic, vagabond, boats, identify, rings, wall, bear, triumph, innocent, innocent, rigid, conserve, resell, steal, steal, taboo, aquatic, wash, tangy, automatic, use, tent, surmise, view, overjoyed, nine, riddle, boy, welcome, operate, rings, swallow, boats";
     const sample2 =
@@ -19,7 +32,7 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
 
     const setSample = (sample) => {
         setInp(sample);
-        setWords(sample);
+        handleChange(sample);
     };
 
     return (
@@ -48,27 +61,40 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                         </span>
                     </div>
                     <p className=" self-center text-2xl">
-                        Use one of the sample lists:
+                        Use a page from the{" "}
+                        <a href="https://www.iasp.org/wp-content/uploads/2019/05/SpellSrWordList.pdf">
+                            official IASP Word List
+                        </a>
+                        :
                     </p>
                     <div className=" flex flex-row gap-8">
-                        <button
-                            onClick={() => setSample(sample1)}
-                            className=" btn btn-secondary"
+                        <select
+                            onChange={(e) => {
+                                setInp(pageList[e.target.value].join(", "));
+                                setWords(pageList[e.target.value]);
+                            }}
+                            className="select select-primary w-full max-w-xs"
                         >
-                            Sample 1
-                        </button>
-                        <button
-                            onClick={() => setSample(sample2)}
-                            className=" btn btn-secondary"
-                        >
-                            Sample 2
-                        </button>
-                        <button
+                            <option value="none" disabled selected>
+                                Choose page
+                            </option>
+                            <option value="p1">Page 1</option>
+                            <option value="p2">Page 2</option>
+                            <option value="p3">Page 3</option>
+                            <option value="p4">Page 4</option>
+                            <option value="p5">Page 5</option>
+                            <option value="p6">Page 6</option>
+                            <option value="p7">Page 7</option>
+                            <option value="p8">Page 8</option>
+                            <option value="p9">Page 9</option>
+                            <option value="p10">Page 10</option>
+                        </select>
+                        {/* <button
                             onClick={() => setSample(p1)}
                             className=" btn btn-secondary"
                         >
                             Page 1
-                        </button>
+                        </button> */}
                     </div>
                     <hr class="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />
                     <button

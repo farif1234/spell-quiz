@@ -1,4 +1,6 @@
-export const p1 = [
+// 2022 IASP Word list
+
+const p1 = [
     "a la carte",
     "abatement",
     "abating",
@@ -221,7 +223,7 @@ export const p1 = [
     "blatantly",
 ];
 
-export const p2 = [
+const p2 = [
     "blithely",
     "blood feud",
     "blood poisoning",
@@ -444,7 +446,7 @@ export const p2 = [
     "corrugation",
 ];
 
-export const p3 = [
+const p3 = [
     "corrupt",
     "cosine",
     "cosmetic",
@@ -667,7 +669,7 @@ export const p3 = [
     "epistemology",
 ];
 
-export const p4 = [
+const p4 = [
     "epistle",
     "Epsom salts",
     "equability",
@@ -890,7 +892,7 @@ export const p4 = [
     "guzzling",
 ];
 
-export const p5 = [
+const p5 = [
     "gyroscopic",
     "gyrostabilizer",
     "habitude",
@@ -1113,7 +1115,7 @@ export const p5 = [
     "Jehovah",
 ];
 
-export const p6 = [
+const p6 = [
     "jejune",
     "jerry-built",
     "jersey",
@@ -1335,7 +1337,7 @@ export const p6 = [
     "nationalism",
 ];
 
-export const p7 = [
+const p7 = [
     "nationalistic",
     "naturally",
     "naval",
@@ -1557,7 +1559,7 @@ export const p7 = [
     "Pleiades",
 ];
 
-export const p8 = [
+const p8 = [
     "plexus",
     "pliability",
     "plunderer",
@@ -1780,7 +1782,7 @@ export const p8 = [
     "ruthlessly",
 ];
 
-export const p9 = [
+const p9 = [
     "sacramental",
     "sagacious",
     "sainted",
@@ -2003,7 +2005,7 @@ export const p9 = [
     "taboret",
 ];
 
-export const p10 = [
+const p10 = [
     "tabular",
     "tactile",
     "talisman",
@@ -2225,3 +2227,16 @@ export const p10 = [
     "zodiac",
     "zombie",
 ];
+
+export const pageList = {
+    p1: p1,
+    p2: p2,
+    p3: p3,
+    p4: p4,
+    p5: p5,
+    p6: p6,
+    p7: p7,
+    p8: p8,
+    p9: p9,
+    p10: p10,
+};

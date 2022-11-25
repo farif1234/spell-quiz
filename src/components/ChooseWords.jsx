@@ -1,26 +1,10 @@
 import React, { useState } from "react";
 import { AiFillWarning } from "react-icons/ai";
-import { p1, p2, p3, p4, p5, p6, p7, p8, p9, p10 } from "../wordData";
+import { pageList } from "../wordData";
 
 const ChooseWords = ({ words, setWords, inp, setInp }) => {
-    const officalList = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10];
-    const pageList = {
-        p1: p1,
-        p2: p2,
-        p3: p3,
-        p4: p4,
-        p5: p5,
-        p6: p6,
-        p7: p7,
-        p8: p8,
-        p9: p9,
-        p10: p10,
-    };
-    const sample1 =
-        "year, silver, toe, praise, acidic, vagabond, boats, identify, rings, wall, bear, triumph, innocent, innocent, rigid, conserve, resell, steal, steal, taboo, aquatic, wash, tangy, automatic, use, tent, surmise, view, overjoyed, nine, riddle, boy, welcome, operate, rings, swallow, boats";
-    const sample2 =
-        "deer, apologize, suck, throat, table, direful, third, used, callous, swing, wealthy, rule, unnatural, act, maniacal, sound, scientific, fat, breezy, rate, equal, cap, fast, aback, ink, alike, adjustment, parsimonious, tested, colorful, legal, demonic, double, compare, boorish, certain, jog, veil, limit, beautiful, gray, appreciate, plane, peaceful, sulky, imperfect, able, comparison, explain, upbeat";
-    const handleChange = (s) => {
+    // update word list for user-inputted words
+    const updateWords = (s) => {
         if (s) {
             const wordArray = s.split(",");
             for (let i = 0; i < wordArray.length; i++) {
@@ -28,11 +12,6 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
             }
             setWords(wordArray);
         }
-    };
-
-    const setSample = (sample) => {
-        setInp(sample);
-        handleChange(sample);
     };
 
     return (
@@ -50,7 +29,6 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                         placeholder="Enter words separated by commas (e.g. cat, hat, bat...)"
                         onChange={(e) => {
                             setInp(e.target.value);
-                            console.log(words);
                         }}
                         value={inp}
                     ></textarea>
@@ -73,8 +51,8 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                     <div className=" flex flex-row gap-8">
                         <select
                             onChange={(e) => {
-                                setInp(pageList[e.target.value].join(", "));
-                                setWords(pageList[e.target.value]);
+                                setInp(pageList[e.target.value].join(", ")); // populate textarea
+                                setWords(pageList[e.target.value]); // word list now in use
                             }}
                             className="select select-primary w-full max-w-xs"
                         >
@@ -92,16 +70,10 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                             <option value="p9">Page 9</option>
                             <option value="p10">Page 10</option>
                         </select>
-                        {/* <button
-                            onClick={() => setSample(p1)}
-                            className=" btn btn-secondary"
-                        >
-                            Page 1
-                        </button> */}
                     </div>
                     <hr class="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />
                     <button
-                        onClick={() => handleChange(inp)}
+                        onClick={() => updateWords(inp)}
                         className="btn btn-info w-1/2"
                     >
                         Update Words

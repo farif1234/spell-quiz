@@ -21,14 +21,14 @@ function shuffle(array) {
 }
 
 const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
-    // set variables
+    // set state variables variables
     const [test, setTest] = useState(false); // is user taking test
     const [i, setI] = useState(0); // index of word list
     const [text, setText] = useState(""); // user input
     const [status, setStatus] = useState(""); // whether input was right or wrong, used to color input background
     const [numberOfQuestion, setnumberOfQuestion] = useState(words.length);
-    const [volume, setVolume] = useState(0.3);
-    const [wordListInUse, setWordListInUse] = useState([...words]);
+    const [volume, setVolume] = useState(0.5);
+    const [wordListInUse, setWordListInUse] = useState([...words]); // store word list in testing order
 
     const isRandom = useRef(false);
 
@@ -39,8 +39,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
         let response = await fetch(Url + wordListInUse[idx]);
         let data = await response.text();
         console.log(data);
-        // audio object with mp3 link
-        const audio = new Audio(data);
+        const audio = new Audio(data); // audio object with retrieved mp3 link
         audio.volume = (volume * 2) / 10;
         audio.play();
     }
@@ -73,6 +72,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
         </h3>
     );
 
+    // Test creation menu
     const setupTest = (
         <div className=" flex flex-col mx-auto items-center w-1/2">
             <div className="collapse hover:scale-105 ">
@@ -170,6 +170,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
                         setStatus("");
                     }}
                     onKeyDown={(e) => {
+                        // key shortcuts
                         if (e.key == "Enter") checkSpell();
                         else if (e.key == "ArrowDown") playAudio(i);
                     }}
@@ -212,6 +213,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
                     <h1 className=" self-center text-5xl font-bold mb-10 p-2">
                         Create Test
                     </h1>
+                    {/* if no word list chosen, display no words prompt */}
                     {words.length == 0 ? noWords : setupTest}
                     {test && inTest}
                 </div>

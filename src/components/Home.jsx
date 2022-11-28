@@ -3,7 +3,7 @@ import React from "react";
 const Home = () => {
     return (
         <div className=" h-full w-full ">
-            <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start  py-20">
+            <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start  py-10">
                 <h1 className=" text-6xl font-bold p-4 rounded-3xl bg-gradient-to-br from-yellow-200 to-sky-300 hover:drop-shadow-2xl hover:scale-[1.03] duration-150 ">
                     Welcome to SpellWell! ✏️
                 </h1>
@@ -22,17 +22,21 @@ const Home = () => {
                     >
                         Merriam-Webster
                     </a>
-                    , and a record to keep track of misspelled words.{" "}
+                    *, and a record to keep track of misspelled words.{" "}
                     <span className=" italic">More features on the way!</span>
+                </p>
+                <p className=" self-start font-light italic text-sm mt-3 p-1 rounded-sm bg-base-200">
+                    *Where applicable. If a word does not have a Merriam-Webster
+                    pronuncation, a text-to-speech API will be used
                 </p>
 
                 <h3 className=" mt-20 mb-8 text-3xl font-semibold underline">
                     How To Use
                 </h3>
-                <p className=" my-1 font-light  text-2xl">
+                <p className=" self-start my-1 font-light  text-2xl">
                     1) Go to the Choose Words menu to create a word list
                 </p>
-                <p className=" my-1 font-light  text-2xl">
+                <p className=" self-start my-1 font-light  text-2xl">
                     2) Once you have created a list, head to Create Quiz to
                     begin learning!
                 </p>

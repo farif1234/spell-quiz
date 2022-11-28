@@ -143,6 +143,11 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
             <h1 className=" mt-4 text-2xl">
                 Progress: {i + 1}/{numberOfQuestion}
             </h1>
+            <progress
+                className="progress w-40 h-[5px] mt-1"
+                value={i + 1}
+                max={numberOfQuestion}
+            ></progress>
             <div className=" flex flex-row gap-4 items-center justify-center w-full mt-5">
                 <FaPlayCircle
                     size={90}

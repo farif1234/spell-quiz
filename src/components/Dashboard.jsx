@@ -1,4 +1,5 @@
 import React from "react";
+import { HiOutlineClipboardCopy } from "react-icons/hi";
 
 const Dashboard = ({ missedWords, setMissedWords }) => {
     const noMissedWordsComp = (
@@ -9,8 +10,36 @@ const Dashboard = ({ missedWords, setMissedWords }) => {
 
     const missedWordsComp = (
         <div className=" text-center">
-            <h1 className=" self-center text-xl text-error">Missed Words:</h1>
-            <p className=" text-lg">{Array.from(missedWords).join(", ")}</p>
+            {/* <h1 className=" self-center text-xl text-error">Missed Words:</h1> */}
+            <div className="text-xl p-3 badge badge-error gap-2 mb-4">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    className="inline-block w-4 h-4 stroke-current"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                </svg>
+                Missed Words:
+            </div>
+            <p className=" text-lg border p-2 relative pr-10">
+                {Array.from(missedWords).join(", ")}
+                {/* <span className=" absolute right-0 mr-3">test</span> */}
+                <HiOutlineClipboardCopy
+                    size={20}
+                    className="  absolute right-1 bottom-1 hover:scale-110 cursor-pointer duration-200"
+                    onClick={() =>
+                        navigator.clipboard.writeText(
+                            Array.from(missedWords).join(", ")
+                        )
+                    }
+                />
+            </p>
             <button
                 onClick={() => setMissedWords(new Set())}
                 className="btn btn-error btn-outline my-6"

@@ -45,6 +45,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
             audio.volume = (volume * 2) / 10;
             audio.play();
         } else {
+            // use tts
             let ourText = wordListInUse[idx];
             const utterThis = new SpeechSynthesisUtterance(ourText);
             utterThis.rate = 0.75;
@@ -194,6 +195,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
                         // key shortcuts
                         if (e.key == "Enter") checkSpell();
                         else if (e.key == "ArrowDown") playAudio(i);
+                        else if (e.key == "ArrowRight") giveUp();
                     }}
                 />
                 <button
@@ -211,9 +213,10 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
                     Give Up
                 </button>
             </div>
-            <p className=" text-xs mr-16">
+            <p className=" text-xs mt-2">
                 <kbd className="kbd kbd-xs">Enter</kbd> to check spelling.{" "}
-                <kbd className="kbd kbd-xs">▼</kbd> to repeat.
+                <kbd className="kbd kbd-xs">▼</kbd> to repeat.{" "}
+                <kbd className="kbd kbd-xs">▶︎</kbd> to give up.
             </p>
 
             <button

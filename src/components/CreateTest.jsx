@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { FaPlayCircle } from "react-icons/fa";
 import { ImVolumeDecrease, ImVolumeIncrease } from "react-icons/im";
+const synth = window.speechSynthesis;
 
 // shuffle array function when random order is selected
 function shuffle(array) {
@@ -38,10 +39,16 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
     async function playAudio(idx) {
         let response = await fetch(Url + wordListInUse[idx]);
         let data = await response.text();
-        console.log(data);
-        const audio = new Audio(data); // audio object with retrieved mp3 link
-        audio.volume = (volume * 2) / 10;
-        audio.play();
+        if (data !== "False") {
+            console.log(data);
+            const audio = new Audio(data); // audio object with retrieved mp3 link
+            audio.volume = (volume * 2) / 10;
+            audio.play();
+        } else {
+            let ourText = wordListInUse[idx];
+            const utterThis = new SpeechSynthesisUtterance(ourText);
+            synth.speak(utterThis);
+        }
     }
 
     // check if user input is correct

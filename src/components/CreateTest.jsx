@@ -28,7 +28,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
     const [text, setText] = useState(""); // user input
     const [status, setStatus] = useState(""); // whether input was right or wrong, used to color input background
     const [numberOfQuestion, setnumberOfQuestion] = useState(words.length);
-    const [volume, setVolume] = useState(0.5);
+    const [volume, setVolume] = useState(2);
     const [wordListInUse, setWordListInUse] = useState([...words]); // store word list in testing order
 
     const isRandom = useRef(false);
@@ -47,6 +47,8 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
         } else {
             let ourText = wordListInUse[idx];
             const utterThis = new SpeechSynthesisUtterance(ourText);
+            utterThis.rate = 0.75;
+            utterThis.volume = (volume * 2) / 10;
             synth.speak(utterThis);
         }
     }
@@ -64,6 +66,13 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
             if (i + 1 >= numberOfQuestion) setTest(false); // end test
             else playAudio(i + 1);
         }
+    };
+
+    // fill input with word
+    const giveUp = () => {
+        setStatus("bg-warning");
+        setText(wordListInUse[i]);
+        setMissedWords(missedWords.add(wordListInUse[i]));
     };
 
     const changeVolume = (num) => {
@@ -195,9 +204,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
                 </button>
                 <button
                     onClick={() => {
-                        setStatus("bg-warning");
-                        setText(wordListInUse[i]);
-                        setMissedWords(missedWords.add(wordListInUse[i]));
+                        giveUp();
                     }}
                     className=" btn btn-lg btn-warning btn-circle text-white text-sm"
                 >
@@ -221,7 +228,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
     return (
         <div>
             <div className=" h-full w-full ">
-                <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-4 py-20">
+                <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-4 py-10">
                     <h1 className=" self-center text-5xl font-bold mb-10 p-2">
                         Create Test
                     </h1>

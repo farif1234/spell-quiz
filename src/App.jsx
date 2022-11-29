@@ -11,6 +11,7 @@ function App() {
     const [words, setWords] = useState([]);
     const [inp, setInp] = useState("");
     const [missedWords, setMissedWords] = useState(new Set());
+    const [numOfWordsSpelled, setNumOfWordsSpelled] = useState(0);
 
     return (
         <div className=" h-screen">
@@ -24,6 +25,7 @@ function App() {
                             <Dashboard
                                 missedWords={missedWords}
                                 setMissedWords={setMissedWords}
+                                numOfWordsSpelled={numOfWordsSpelled}
                             />
                         }
                     />
@@ -35,6 +37,8 @@ function App() {
                                 setWords={setWords}
                                 missedWords={missedWords}
                                 setMissedWords={setMissedWords}
+                                numOfWordsSpelled={numOfWordsSpelled}
+                                setNumOfWordsSpelled={setNumOfWordsSpelled}
                             />
                         }
                     />

@@ -21,7 +21,14 @@ function shuffle(array) {
     return array;
 }
 
-const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
+const CreateTest = ({
+    words,
+    setWords,
+    missedWords,
+    setMissedWords,
+    numOfWordsSpelled,
+    setNumOfWordsSpelled,
+}) => {
     // set state variables variables
     const [test, setTest] = useState(false); // is user taking test
     const [i, setI] = useState(0); // index of word list
@@ -62,6 +69,7 @@ const CreateTest = ({ words, setWords, missedWords, setMissedWords }) => {
             setMissedWords(missedWords.add(wordListInUse[i]));
         } else {
             setI(i + 1);
+            setNumOfWordsSpelled(numOfWordsSpelled + 1);
             setText("");
             setStatus(status == "bg-warning" ? "" : "bg-green-300");
             if (i + 1 >= numberOfQuestion) setTest(false); // end test

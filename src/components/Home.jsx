@@ -25,7 +25,7 @@ const Home = () => {
                     *, and a record to keep track of misspelled words.{" "}
                     <span className=" italic">More features on the way!</span>
                 </p>
-                <p className=" self-start font-light italic text-sm mt-3 p-1 rounded-sm bg-base-200">
+                <p className=" self-start font-light italic text-sm mt-3 p-1 px-2 rounded-sm bg-base-200">
                     *Where applicable. If a word does not have a Merriam-Webster
                     pronuncation, a text-to-speech API will be used
                 </p>

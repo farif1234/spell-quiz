@@ -38,7 +38,7 @@ const Dashboard = ({ missedWords, setMissedWords, numOfWordsSpelled }) => {
         <div>
             <div className=" h-full w-full ">
                 <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-4 py-10">
-                    <h1 className=" self-center text-5xl font-bold mb-2 p-2">
+                    <h1 className=" self-center text-5xl font-bold p-2">
                         Dashboard
                     </h1>
                     <p className=" text-2xl mb-12">

@@ -240,7 +240,7 @@ const CreateTest = ({
         <div>
             <div className=" h-full w-full ">
                 <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-4 py-10">
-                    <h1 className=" self-center text-5xl font-bold mb-10 p-2">
+                    <h1 className=" self-center text-5xl font-bold p-2">
                         Create Test
                     </h1>
                     {/* if no word list chosen, display no words prompt */}

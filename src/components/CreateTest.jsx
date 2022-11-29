@@ -3,6 +3,8 @@ import { FaPlayCircle } from "react-icons/fa";
 import { ImVolumeDecrease, ImVolumeIncrease } from "react-icons/im";
 const synth = window.speechSynthesis;
 
+const Url = import.meta.env.VITE_API_URL;
+
 // shuffle array function when random order is selected
 function shuffle(array) {
     let currentIndex = array.length,
@@ -34,13 +36,11 @@ const CreateTest = ({
     const [i, setI] = useState(0); // index of word list
     const [text, setText] = useState(""); // user input
     const [status, setStatus] = useState(""); // whether input was right or wrong, used to color input background
-    const [numberOfQuestion, setnumberOfQuestion] = useState(words.length);
+    const [numberOfQuestion, setnumberOfQuestion] = useState(words.length ?? 1);
     const [volume, setVolume] = useState(2);
     const [wordListInUse, setWordListInUse] = useState([...words]); // store word list in testing order
 
     const isRandom = useRef(false);
-
-    const Url = "http://127.0.0.1:5000/audio/";
 
     // receive mp3 link and play audio
     async function playAudio(idx) {
@@ -123,10 +123,10 @@ const CreateTest = ({
                 type="number"
                 placeholder=""
                 min="1"
-                max={words.length}
+                max={words.length ?? 1}
                 className="input input-bordered input-primary w-full max-w-xs"
-                disabled={test}
-                value={numberOfQuestion}
+                disabled={test ?? false}
+                value={numberOfQuestion ?? 0}
                 onChange={(e) => setnumberOfQuestion(e.target.value)}
             />
             <div className=" flex flex-row gap-4 mt-4">
@@ -194,7 +194,7 @@ const CreateTest = ({
                     type="text"
                     placeholder="Type here"
                     className={`input input-bordered input-primary w-full max-w-xs ${status}`}
-                    value={text}
+                    value={text ?? ""}
                     onChange={(e) => {
                         setText(e.target.value);
                         setStatus("");

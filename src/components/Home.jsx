@@ -22,7 +22,8 @@ const Home = () => {
                     >
                         Merriam-Webster
                     </a>
-                    *, and a record to keep track of misspelled words.{" "}
+                    * for accurate tests, and a record to keep track of
+                    misspelled words.{" "}
                     <span className=" italic">More features on the way!</span>
                 </p>
                 <p className=" self-start font-light italic text-sm mt-3 p-1 px-2 rounded-sm bg-base-200">
@@ -34,11 +35,25 @@ const Home = () => {
                     How To Use
                 </h3>
                 <p className=" self-start my-1 font-light  text-2xl">
-                    1) Go to the Choose Words menu to create a word list
+                    1) Go to{" "}
+                    <span className=" p-1 rounded-lg bg-primary">
+                        Choose Words
+                    </span>{" "}
+                    to create a word list
                 </p>
                 <p className=" self-start my-1 font-light  text-2xl">
-                    2) Once you have created a list, head to Create Quiz to
-                    begin learning!
+                    2) Once you have created a list, head to{" "}
+                    <span className=" p-1 rounded-lg bg-primary">
+                        Create Test
+                    </span>{" "}
+                    to begin learning!
+                </p>
+                <p className=" self-start my-1 font-light  text-2xl">
+                    3) View your{" "}
+                    <span className=" p-1 rounded-lg bg-primary">
+                        Dashboard
+                    </span>{" "}
+                    at any time to see your stats and missed words.
                 </p>
             </div>
         </div>

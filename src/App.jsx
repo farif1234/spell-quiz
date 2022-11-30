@@ -8,8 +8,8 @@ import { useState } from "react";
 import Dashboard from "./components/Dashboard";
 
 function App() {
-    const [words, setWords] = useState([]);
-    const [inp, setInp] = useState("");
+    const [words, setWords] = useState([]); // array of words user will be tested on
+    const [inp, setInp] = useState(""); // input for user inputted words
     const [missedWords, setMissedWords] = useState(new Set());
     const [numOfWordsSpelled, setNumOfWordsSpelled] = useState(0);
 

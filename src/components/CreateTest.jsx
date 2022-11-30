@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import { FaPlayCircle } from "react-icons/fa";
 import { ImVolumeDecrease, ImVolumeIncrease } from "react-icons/im";
+import getPronunciationLink from "../getPronunciationLink";
 const synth = window.speechSynthesis;
 
 const Url = import.meta.env.VITE_API_URL;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 // shuffle array function when random order is selected
 function shuffle(array) {
@@ -44,8 +46,9 @@ const CreateTest = ({
 
     // receive mp3 link and play audio
     async function playAudio(idx) {
-        let response = await fetch(Url + wordListInUse[idx]);
-        let data = await response.text();
+        // let response = await fetch(Url + wordListInUse[idx]);
+        // let data = await response.text();
+        let data = await getPronunciationLink(wordListInUse[idx], API_KEY);
         if (data !== "False") {
             console.log(data);
             const audio = new Audio(data); // audio object with retrieved mp3 link

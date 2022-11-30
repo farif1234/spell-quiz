@@ -10,6 +10,7 @@ const Dashboard = ({ missedWords, setMissedWords, numOfWordsSpelled }) => {
         </h1>
     );
 
+    // display all missed words
     const missedWordsComp = (
         <div className=" flex flex-col w-2/3 rounded-3xl p-3 pb-8 bg-red-100 drop-shadow-lg ">
             <h1 className=" text-2xl font-bold p-2">Missed Words</h1>
@@ -25,12 +26,6 @@ const Dashboard = ({ missedWords, setMissedWords, numOfWordsSpelled }) => {
                     }
                 />
             </p>
-            {/* <button
-                onClick={() => setMissedWords(new Set())}
-                className=" self-center btn btn-error btn-outline my-6"
-            >
-                Clear Missed Words
-            </button> */}
         </div>
     );
 

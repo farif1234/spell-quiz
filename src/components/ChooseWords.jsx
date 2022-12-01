@@ -38,6 +38,7 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                     <textarea
                         className="textarea textarea-primary mt-1  w-2/3 text-sm h-40"
                         placeholder="Enter words separated by commas (e.g. cat, hat, bat...)"
+                        spellCheck={false}
                         onChange={(e) => {
                             setInp(e.target.value);
                         }}

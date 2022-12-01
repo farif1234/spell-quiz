@@ -3,6 +3,17 @@ import { AiFillWarning } from "react-icons/ai";
 import { pageList } from "../wordData";
 
 const ChooseWords = ({ words, setWords, inp, setInp }) => {
+    const [isUpdateAlertVisible, setIsUpdateAlertVisible] = useState(false);
+    const [isClearAlertVisible, setIsClearAlertVisible] = useState(false);
+    const handleClick = (func, show = false) => {
+        if (inp != "" || show) {
+            func(true);
+            setTimeout(() => {
+                func(false);
+            }, 1500);
+        }
+    };
+
     // update word list for user-inputted words
     const updateWords = (s) => {
         if (s) {
@@ -53,6 +64,7 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                             onChange={(e) => {
                                 setInp(pageList[e.target.value].join(", ")); // populate textarea
                                 setWords(pageList[e.target.value]); // word list now in use
+                                handleClick(setIsUpdateAlertVisible, true);
                             }}
                             className="select select-primary w-full max-w-xs"
                             defaultValue={"none"}
@@ -74,7 +86,10 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                     </div>
                     <hr className="my-4 mx-auto w-48 h-1 rounded border-0 md:my-6 bg-base-300" />
                     <button
-                        onClick={() => updateWords(inp)}
+                        onClick={() => {
+                            handleClick(setIsUpdateAlertVisible);
+                            updateWords(inp);
+                        }}
                         className="btn btn-info w-1/2"
                     >
                         Update Words
@@ -84,6 +99,7 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                             onClick={() => {
                                 setWords([]);
                                 setInp("");
+                                handleClick(setIsClearAlertVisible);
                             }}
                             className="btn btn-error w-1/2"
                         >
@@ -93,6 +109,31 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                             <AiFillWarning className=" inline mb-1 mx-1 text-xl text-warning" />
                             Clearing words will erase current list!
                         </p>
+                    </div>
+
+                    <div className=" flex flex-col w-1/2 mt-10">
+                        <div
+                            className={`alert alert-info shadow-lg w-full animate-bounce transition-opacity duration-500 ${
+                                isUpdateAlertVisible
+                                    ? "opacity-100"
+                                    : "opacity-0"
+                            }`}
+                        >
+                            <div>
+                                <span>Updated!</span>
+                            </div>
+                        </div>
+                        <div
+                            className={`alert alert-error shadow-lg w-full animate-bounce  transition-opacity duration-500 ${
+                                isClearAlertVisible
+                                    ? "opacity-100"
+                                    : "opacity-0"
+                            }`}
+                        >
+                            <div>
+                                <span>Cleared!</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -25,6 +25,14 @@ function shuffle(array) {
     return array;
 }
 
+function cleanDefinition(defArray, word) {
+    const removeStr = word.slice(0, 4);
+    const regex = new RegExp("\\S*" + removeStr + "\\S*", "gi");
+    for (let i in defArray) {
+        defArray[i] = defArray[i].replace(regex, "---");
+    }
+}
+
 const CreateTest = ({
     words,
     setWords,
@@ -41,17 +49,21 @@ const CreateTest = ({
     const [numberOfQuestion, setnumberOfQuestion] = useState(words.length ?? 1);
     const [volume, setVolume] = useState(2);
     const [wordListInUse, setWordListInUse] = useState([...words]); // store word list in testing order
+    const [definition, setDefinition] = useState([""]);
 
     const isRandom = useRef(false);
 
     // receive mp3 link and play audio
     async function playAudio(idx) {
-        // let response = await fetch(Url + wordListInUse[idx]);
-        // let data = await response.text();
         let data = await getPronunciationLink(wordListInUse[idx], API_KEY);
-        if (data !== "False") {
-            console.log(data);
-            const audio = new Audio(data); // audio object with retrieved mp3 link
+        console.log(data);
+        // data = await data.json();
+        cleanDefinition(data.def, wordListInUse[idx]);
+        setDefinition(data.def);
+        if (data.status == "success") {
+            // console.log(data);
+
+            const audio = new Audio(data.link); // audio object with retrieved mp3 link
             audio.volume = (volume * 2) / 10;
             audio.play();
         } else {
@@ -162,7 +174,7 @@ const CreateTest = ({
 
     const inTest = (
         <div className=" flex flex-col mx-auto items-center w-1/2 p-4 bg-yellow-100 drop-shadow-2xl rounded-2xl">
-            <hr class="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />
+            <hr className="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />
             <h1 className=" text-xl">
                 <span className=" animate-pulse italic">
                     Test in progress...
@@ -195,6 +207,7 @@ const CreateTest = ({
 
                 <input
                     type="text"
+                    spellCheck={false}
                     placeholder="Type here"
                     className={`input input-bordered input-primary w-full max-w-xs ${status}`}
                     value={text ?? ""}
@@ -229,6 +242,20 @@ const CreateTest = ({
                 <kbd className="kbd kbd-xs">▼</kbd> to repeat.{" "}
                 <kbd className="kbd kbd-xs">▶︎</kbd> to give up.
             </p>
+            <div className=" text-sm mt-6 rounded-lg collapse bg-base-200">
+                <input type="checkbox" />
+                <div className=" collapse-title font-bold">
+                    Definition:
+                    <span className=" font-thin"> (Click to show/hide)</span>
+                </div>
+                <div className=" collapse-content">
+                    {definition.map((def, i) => (
+                        <p key={i} className=" text-xs mt-1 italic">
+                            {def}
+                        </p>
+                    ))}
+                </div>
+            </div>
 
             <button
                 onClick={() => setTest(false)}

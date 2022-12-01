@@ -4,22 +4,22 @@ export default async function getPronunciationLink(word, key) {
     let response_json = await response.json();
 
     const word_id = getWordID(response_json);
+    const def = getDefinition(response_json);
 
     let base_filename;
     // if word does not have entry, check related words
     if (word !== word_id) {
         base_filename = checkRunOnWords(word, response_json);
-
         if (base_filename == "error") {
             base_filename = checkInflectionWords(word, response_json);
         }
     } else {
         base_filename = getFilename(response_json);
     }
-    if (base_filename == "error") return "False";
+    if (base_filename == "error") return { status: "error", def: def };
 
     const subdirectory = getSubdir(word, base_filename);
-    if (subdirectory == "False") return "False";
+    if (subdirectory == "error") return { status: "error", def: def };
 
     const link =
         "https://media.merriam-webster.com/audio/prons/en/us/mp3/" +
@@ -27,8 +27,10 @@ export default async function getPronunciationLink(word, key) {
         "/" +
         base_filename +
         ".mp3";
+
+    console.log(def);
     console.log(link);
-    return link;
+    return { status: "success", link: link, def: def };
 }
 
 async function getJson(word, key) {
@@ -98,6 +100,14 @@ function getSubdir(word, filename) {
         else subdir = word[0].toLowerCase();
         return subdir;
     } catch (error) {
-        return "False";
+        return "error";
+    }
+}
+
+function getDefinition(json) {
+    try {
+        return json[0]["shortdef"];
+    } catch (err) {
+        return ["not found"];
     }
 }

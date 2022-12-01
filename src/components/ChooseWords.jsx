@@ -55,8 +55,9 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                                 setWords(pageList[e.target.value]); // word list now in use
                             }}
                             className="select select-primary w-full max-w-xs"
+                            defaultValue={"none"}
                         >
-                            <option value="none" disabled selected>
+                            <option value="none" disabled>
                                 Choose page
                             </option>
                             <option value="p1">Page 1</option>

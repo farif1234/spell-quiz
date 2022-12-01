@@ -122,7 +122,7 @@ const CreateTest = ({
                     type="checkbox"
                 />
                 <div
-                    className={`collapse-title text-xl font-medium mt-5  ${
+                    className={`collapse-title text-xl font-medium mt-2  ${
                         test ? "bg-base-300" : "bg-primary"
                     }`}
                 >
@@ -133,13 +133,13 @@ const CreateTest = ({
                     <p className=" italic pt-4">Word Count: {words.length}</p>
                 </div>
             </div>
-            <h3 className=" text-xl mt-10">Number of questions:</h3>
+            <h3 className=" text-lg mt-6">Number of questions:</h3>
             <input
                 type="number"
                 placeholder=""
                 min="1"
                 max={words.length ?? 1}
-                className="input input-bordered input-primary w-full max-w-xs"
+                className="input input-bordered input-primary w-1/5 max-w-xs"
                 disabled={test ?? false}
                 value={numberOfQuestion ?? 0}
                 onChange={(e) => setnumberOfQuestion(e.target.value)}
@@ -163,7 +163,7 @@ const CreateTest = ({
                         setWordListInUse(shuffle(wordListInUse));
                     }
                 }}
-                className={`btn btn-secondary my-8 btn-wide ${
+                className={`btn btn-secondary my-12 btn-wide ${
                     test && "btn-disabled"
                 }`}
             >
@@ -173,7 +173,7 @@ const CreateTest = ({
     );
 
     const inTest = (
-        <div className=" flex flex-col mx-auto items-center w-1/2 p-4 bg-yellow-100 drop-shadow-2xl rounded-2xl">
+        <div className=" flex flex-col mx-auto items-center w-1/2 p-4 bg-yellow-100 drop-shadow-2xl rounded-2xl mb-20">
             <hr className="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />
             <h1 className=" text-xl">
                 <span className=" animate-pulse italic">
@@ -268,10 +268,14 @@ const CreateTest = ({
 
     return (
         <div>
-            <div className=" h-full w-full ">
-                <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-4 py-10">
-                    <h1 className=" self-center text-5xl font-bold p-2">
+            <div className=" h-fit w-full ">
+                <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-2 py-5">
+                    <h1 className=" self-center text-3xl font-bold p-2">
                         Create Test
+                    </h1>
+                    <h1 className=" self-center text-lg">
+                        Confirm your words, select the number of questions, and
+                        begin testing!
                     </h1>
                     {/* if no word list chosen, display no words prompt */}
                     {words.length == 0 ? noWords : setupTest}

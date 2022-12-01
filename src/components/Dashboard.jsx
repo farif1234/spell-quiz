@@ -13,7 +13,7 @@ const Dashboard = ({ missedWords, setMissedWords, numOfWordsSpelled }) => {
     // display all missed words
     const missedWordsComp = (
         <div className=" flex flex-col w-2/3 rounded-3xl p-3 pb-8 bg-red-100 drop-shadow-lg ">
-            <h1 className=" text-2xl font-bold p-2">Missed Words</h1>
+            <h1 className=" text-xl font-bold p-2">Missed Words</h1>
             <p className=" text-lg rounded-lg  p-2 relative pr-10 bg-base-100 mt-2">
                 {Array.from(missedWords).join(", ")}
                 <HiOutlineClipboardCopy
@@ -32,15 +32,15 @@ const Dashboard = ({ missedWords, setMissedWords, numOfWordsSpelled }) => {
     return (
         <div>
             <div className=" h-full w-full ">
-                <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-4 py-10">
-                    <h1 className=" self-center text-5xl font-bold p-2">
+                <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-2 py-5">
+                    <h1 className=" self-center text-3xl font-bold p-2">
                         Dashboard
                     </h1>
-                    <p className=" text-2xl mb-12">
+                    <p className=" text-lg ">
                         Use this page to keep track of progress.
                     </p>
                     <div className=" flex flex-col w-2/3 p-3 pb-7 rounded-3xl bg-yellow-100 drop-shadow-lg">
-                        <h1 className=" text-2xl font-bold p-2">Stats</h1>
+                        <h1 className=" text-xl font-bold p-2">Stats</h1>
                         <div className="stats shadow">
                             <div className="stat">
                                 <div className="stat-figure text-secondary">

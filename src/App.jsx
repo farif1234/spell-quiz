@@ -14,9 +14,9 @@ function App() {
     const [numOfWordsSpelled, setNumOfWordsSpelled] = useState(0);
 
     return (
-        <div className=" h-screen">
+        <div className=" flex flex-col h-screen">
             <Navbar />
-            <div className="">
+            <div className=" grow">
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route

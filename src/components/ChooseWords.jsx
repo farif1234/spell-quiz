@@ -17,15 +17,15 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
     return (
         <div>
             <div className=" h-full w-full ">
-                <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-4 py-10">
-                    <h1 className=" self-center text-5xl font-bold p-2">
+                <div className=" max-w-screen-lg mx-auto flex flex-col items-center justify-start gap-2 py-5">
+                    <h1 className=" self-center text-3xl font-bold p-2">
                         Choose Words
                     </h1>
-                    <h1 className=" self-center text-2xl">
+                    <h1 className=" self-center text-lg">
                         Type in the words you want to learn in the textbox below
                     </h1>
                     <textarea
-                        className="textarea textarea-primary mt-1  w-1/2 text-sm h-40"
+                        className="textarea textarea-primary mt-1  w-2/3 text-sm h-40"
                         placeholder="Enter words separated by commas (e.g. cat, hat, bat...)"
                         onChange={(e) => {
                             setInp(e.target.value);
@@ -33,12 +33,12 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                         value={inp}
                     ></textarea>
                     <div className="inline-flex justify-center items-center w-full">
-                        <hr className="my-8 w-64 h-px bg-gray-200 border-0 dark:bg-gray-700" />
+                        <hr className="my-4 w-64 h-px bg-gray-200 border-0 dark:bg-gray-700" />
                         <span className="absolute left-1/2 px-3 font-medium text-gray-900 bg-white -translate-x-1/2 dark:text-white dark:bg-gray-900">
                             or
                         </span>
                     </div>
-                    <p className=" self-center text-2xl">
+                    <p className=" self-center text-lg">
                         Use a page from the{" "}
                         <a
                             className=" underline"
@@ -72,7 +72,7 @@ const ChooseWords = ({ words, setWords, inp, setInp }) => {
                             <option value="p10">Page 10</option>
                         </select>
                     </div>
-                    <hr className="my-4 mx-auto w-48 h-1 rounded border-0 md:my-10 bg-base-300" />
+                    <hr className="my-4 mx-auto w-48 h-1 rounded border-0 md:my-6 bg-base-300" />
                     <button
                         onClick={() => updateWords(inp)}
                         className="btn btn-info w-1/2"

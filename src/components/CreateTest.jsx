@@ -106,7 +106,7 @@ const CreateTest = ({
     };
 
     const noWords = (
-        <h3 className=" text-xl px-3 py-1 rounded-full bg-red-300 animate-bounce">
+        <h3 className=" text-xl px-3 py-1 mt-8 rounded-full bg-red-300 animate-bounce">
             Looks like you have chosen no words! Head over to Choose Words to
             create your list.
         </h3>
@@ -122,7 +122,7 @@ const CreateTest = ({
                     type="checkbox"
                 />
                 <div
-                    className={`collapse-title text-xl font-medium mt-2  ${
+                    className={`collapse-title text-xl font-medium mt-6  ${
                         test ? "bg-base-300" : "bg-primary"
                     }`}
                 >

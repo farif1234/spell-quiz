@@ -26,21 +26,24 @@ const ReportBug = () => {
                             <input
                                 type="email"
                                 name="email"
-                                className="input w-1/2 max-w-xs"
+                                className="input w-1/2 max-w-xs mt-2"
                             />
                         </label>
                     </p>
-                    <p className=" flex flex-col">
+                    <p className=" flex flex-col w-full">
                         <label>
                             Message:{" "}
                             <textarea
                                 name="message"
-                                className="textarea w-full"
+                                className="textarea w-full mt-2"
                             ></textarea>
                         </label>
                     </p>
                     <p>
-                        <button className="btn btn-info" type="submit">
+                        <button
+                            className="btn btn-info hover:scale-105"
+                            type="submit"
+                        >
                             Submit
                         </button>
                     </p>

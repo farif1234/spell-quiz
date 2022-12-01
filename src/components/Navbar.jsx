@@ -31,8 +31,13 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/words"} className=" text-lg">
+                            <Link to={"/words"} className=" text-lg mx-1">
                                 Choose Words
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={"/report"} className=" text-lg bg-error">
+                                Report a bug
                             </Link>
                         </li>
                     </ul>

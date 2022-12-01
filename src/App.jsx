@@ -6,6 +6,7 @@ import ChooseWords from "./components/ChooseWords";
 import Footer from "./components/Footer";
 import { useState } from "react";
 import Dashboard from "./components/Dashboard";
+import ReportBug from "./components/ReportBug";
 
 function App() {
     const [words, setWords] = useState([]); // array of words user will be tested on
@@ -53,6 +54,7 @@ function App() {
                             />
                         }
                     />
+                    <Route path="/report" element={<ReportBug />} />
                 </Routes>
             </div>
             <Footer />

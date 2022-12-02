@@ -5,6 +5,8 @@ export default async function getPronunciationLink(word, key) {
 
     const word_id = getWordID(response_json);
     const def = getDefinition(response_json);
+    console.log("Def");
+    console.log(def);
 
     let base_filename;
     // if word does not have entry, check related words
@@ -28,8 +30,8 @@ export default async function getPronunciationLink(word, key) {
         base_filename +
         ".mp3";
 
-    console.log(def);
-    console.log(link);
+    // console.log(def);
+    // console.log(link);
     return { status: "success", link: link, def: def };
 }
 
@@ -56,7 +58,6 @@ function getWordID(json) {
 }
 
 function checkRunOnWords(word, json) {
-    // alert(word);
     try {
         let filename = "error";
         json[0]["uros"].forEach((di) => {
@@ -106,7 +107,8 @@ function getSubdir(word, filename) {
 
 function getDefinition(json) {
     try {
-        return json[0]["shortdef"];
+        const tempDefinition = json[0]["shortdef"];
+        return tempDefinition ? tempDefinition : ["not found"];
     } catch (err) {
         return ["not found"];
     }

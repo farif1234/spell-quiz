@@ -56,13 +56,12 @@ const CreateTest = ({
     // receive mp3 link and play audio
     async function playAudio(idx) {
         let data = await getPronunciationLink(wordListInUse[idx], API_KEY);
+        console.log("Create Test");
         console.log(data);
-        // data = await data.json();
         cleanDefinition(data.def, wordListInUse[idx]);
         setDefinition(data.def);
         if (data.status == "success") {
             // console.log(data);
-
             const audio = new Audio(data.link); // audio object with retrieved mp3 link
             audio.volume = (volume * 2) / 10;
             audio.play();

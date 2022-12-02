@@ -8,7 +8,7 @@ const Footer = () => {
                     <p>
                         Copyright © 2022 - Faihaan Arif
                         <a
-                            href="https://github.com/farif1234/spell-quiz"
+                            href="https://github.com/farif1234/spellwell"
                             className="link mx-4"
                         >
                             View source code

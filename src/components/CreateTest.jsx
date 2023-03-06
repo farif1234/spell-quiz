@@ -3,6 +3,8 @@ import { FaPlayCircle } from "react-icons/fa";
 import { ImVolumeDecrease, ImVolumeIncrease } from "react-icons/im";
 import getPronunciationLink from "../getPronunciationLink";
 const synth = window.speechSynthesis;
+import { auth, db } from "../config/firebase";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 
 const Url = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -50,7 +52,7 @@ const CreateTest = ({
     const [volume, setVolume] = useState(2);
     const [wordListInUse, setWordListInUse] = useState([...words]); // store word list in testing order
     const [definition, setDefinition] = useState([""]);
-
+    let initNumOfWordsRef = useRef(numOfWordsSpelled);
     const isRandom = useRef(false);
 
     // receive mp3 link and play audio
@@ -84,9 +86,12 @@ const CreateTest = ({
         } else {
             setI(i + 1);
             setNumOfWordsSpelled(numOfWordsSpelled + 1);
+            //initNumOfWordsRef.current += 1;
             setText("");
             setStatus(status == "bg-warning" ? "" : "bg-green-300");
-            if (i + 1 >= numberOfQuestion) setTest(false); // end test
+            //setTimeout(() => alert(numOfWordsSpelled), 1000);
+            //alert(numOfWordsSpelled);
+            if (i + 1 >= numberOfQuestion) endTest(); // end test
             else playAudio(i + 1);
         }
     };
@@ -96,6 +101,22 @@ const CreateTest = ({
         setStatus("bg-warning");
         setText(wordListInUse[i]);
         setMissedWords(missedWords.add(wordListInUse[i]));
+    };
+
+    const endTest = async () => {
+        setTest(false);
+        if (auth.currentUser) {
+            const userRef = doc(db, "Users", auth.currentUser.uid);
+            console.log(initNumOfWordsRef.current);
+            console.log(numberOfQuestion);
+            //alert(numOfWordsSpelled);
+            await updateDoc(userRef, {
+                numWordsSpelled:
+                    parseInt(initNumOfWordsRef.current) +
+                    parseInt(numberOfQuestion),
+                missedWords: Array.from(missedWords),
+            });
+        }
     };
 
     const changeVolume = (num) => {
@@ -257,7 +278,7 @@ const CreateTest = ({
             </div>
 
             <button
-                onClick={() => setTest(false)}
+                onClick={() => endTest()}
                 className="btn btn-error my-12 btn-wide"
             >
                 Exit Test

@@ -13,10 +13,11 @@ function App() {
     const [inp, setInp] = useState(""); // input for user inputted words
     const [missedWords, setMissedWords] = useState(new Set());
     const [numOfWordsSpelled, setNumOfWordsSpelled] = useState(0);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return (
         <div className=" flex flex-col h-screen">
-            <Navbar />
+            <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             <div className=" grow">
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -27,6 +28,9 @@ function App() {
                                 missedWords={missedWords}
                                 setMissedWords={setMissedWords}
                                 numOfWordsSpelled={numOfWordsSpelled}
+                                setNumOfWordsSpelled={setNumOfWordsSpelled}
+                                isLoggedIn={isLoggedIn}
+                                setIsLoggedIn={setIsLoggedIn}
                             />
                         }
                     />

@@ -2,6 +2,16 @@
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import {
+    getFirestore,
+    query,
+    getDocs,
+    collection,
+    where,
+    addDoc,
+} from "firebase/firestore";
+
+const FIREBASE_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -9,7 +19,7 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCjKq7j8M1XtI6-ioS1lrhYIbTbIHpNNbk",
+    apiKey: FIREBASE_KEY,
     authDomain: "spellwell-40273.firebaseapp.com",
     projectId: "spellwell-40273",
     storageBucket: "spellwell-40273.appspot.com",
@@ -22,3 +32,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 export const auth = getAuth(app);
+export const db = getFirestore(app);

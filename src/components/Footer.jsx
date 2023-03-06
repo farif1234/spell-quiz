@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -7,12 +8,9 @@ const Footer = () => {
                 <div>
                     <p>
                         Copyright © 2022 - Faihaan Arif
-                        <a
-                            href="https://github.com/farif1234/spellwell"
-                            className="link mx-4"
-                        >
-                            View source code
-                        </a>
+                        <Link to={"/report"} className=" link link-error mx-4">
+                            Report a bug
+                        </Link>
                     </p>
                 </div>
             </footer>

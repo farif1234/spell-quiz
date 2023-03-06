@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HiOutlineClipboardCopy } from "react-icons/hi";
 import { AiOutlineNumber } from "react-icons/ai";
 import { MdSpellcheck } from "react-icons/md";
+import { ImOpt } from "react-icons/im";
+import { auth, db } from "../config/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { getDoc, collection, doc } from "firebase/firestore";
 
-const Dashboard = ({ missedWords, setMissedWords, numOfWordsSpelled }) => {
+const Dashboard = ({
+    missedWords,
+    setMissedWords,
+    numOfWordsSpelled,
+    setNumOfWordsSpelled,
+    isLoggedIn,
+    setIsLoggedIn,
+}) => {
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            setIsLoggedIn(true);
+        } else setIsLoggedIn(false);
+    });
+    useEffect(() => {
+        if (auth.currentUser) {
+            async function updateData() {
+                const usersRef = doc(db, "Users", auth.currentUser.uid);
+                console.log("uid", auth.currentUser.uid);
+                try {
+                    const userData = await getDoc(usersRef);
+                    if (userData.exists()) {
+                        const data = userData.data();
+                        setMissedWords(new Set(data.missedWords));
+                        setNumOfWordsSpelled(data.numWordsSpelled);
+                    } else console.log("No document found");
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+            updateData();
+        }
+    }, [auth.currentUser]);
+
     const noMissedWordsComp = (
         <h1 className=" self-center text-xl rounded-full p-2 bg-green-300 animate-bounce">
             You have no missed words! ✅
@@ -13,7 +49,13 @@ const Dashboard = ({ missedWords, setMissedWords, numOfWordsSpelled }) => {
     // display all missed words
     const missedWordsComp = (
         <div className=" flex flex-col w-2/3 rounded-3xl p-3 pb-8 bg-red-100 drop-shadow-lg ">
-            <h1 className=" text-xl font-bold p-2">Missed Words</h1>
+            <h1 className=" text-xl font-bold p-2">
+                Missed Words
+                <span className=" ml-2 text-sm">
+                    {" "}
+                    (Count: {missedWords.size})
+                </span>
+            </h1>
             <p className=" text-lg rounded-lg  p-2 relative pr-10 bg-base-100 mt-2">
                 {Array.from(missedWords).join(", ")}
                 <HiOutlineClipboardCopy

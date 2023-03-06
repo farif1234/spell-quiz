@@ -3,9 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Auth from "./Auth";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     const [showLogin, setShowLogin] = useState(false);
-
     return (
         <div className=" mx-2 pt-2 items-center">
             <div className="navbar bg-primary text-primary-content rounded-3xl justify-between">
@@ -45,14 +44,14 @@ const Navbar = () => {
                                 Choose Words
                             </Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link
                                 to={"/report"}
                                 className=" text-lg bg-error mx-1"
                             >
                                 Report a bug
                             </Link>
-                        </li>
+                        </li> */}
                         <div className="">
                             <div
                                 className="btn btn-info text-sm ml-4 "
@@ -62,7 +61,12 @@ const Navbar = () => {
                             </div>
                             {/* Login box */}
 
-                            {showLogin && <Auth />}
+                            {showLogin && (
+                                <Auth
+                                    isLoggedIn={isLoggedIn}
+                                    setIsLoggedIn={setIsLoggedIn}
+                                />
+                            )}
                         </div>
                     </ul>
                 </div>
